@@ -16,7 +16,7 @@ class LIFOCache(BaseCache):
         """
         Add key as the dictionary key and item as the value for the key
         Remove the last value if max entries are reached
-        Args: 
+        Args:
             key: The key to associate the value
             item: The value to associate the key
         Returns:
@@ -39,7 +39,7 @@ class LIFOCache(BaseCache):
         """
         Return the value linked with the key
         If not return None
-        Args: 
+        Args:
             key: The key to associate the value
             item: The value to associate the key
         Returns:

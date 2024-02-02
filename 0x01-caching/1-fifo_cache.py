@@ -17,7 +17,7 @@ class FIFOCache(BaseCache):
         """
         Add key as the dictionary key and item as the value for the key
         Remove the first value if max entries are reached
-        Args: 
+        Args:
             key: The key to associate the value
             item: The value to associate the key
         Returns:
@@ -40,7 +40,7 @@ class FIFOCache(BaseCache):
         """
         Return the value linked with the key
         If not return None
-        Args: 
+        Args:
             key: The key to associate the value
             item: The value to associate the key
         Returns:

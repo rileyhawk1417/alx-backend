@@ -17,7 +17,7 @@ class LRUCache(BaseCache):
         """
         Add key as the dictionary key and item as the value for the key
         Remove the least used value & key if max entries are reached
-        Args: 
+        Args:
             key: The key to associate the value
             item: The value to associate the key
         Returns:
@@ -28,7 +28,7 @@ class LRUCache(BaseCache):
             if key in self.cache_data:
                 self.cache_data[key] = item
                 """
-                Remove current position for key 
+                Remove current position for key
                 and add to the top of the queue
                 """
                 self.lru_queue.remove(key)
@@ -46,7 +46,7 @@ class LRUCache(BaseCache):
         """
         Return the value linked with the key
         If not return None
-        Args: 
+        Args:
             key: The key to associate the value
             item: The value to associate the key
         Returns:

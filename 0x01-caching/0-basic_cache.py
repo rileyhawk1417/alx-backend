@@ -14,7 +14,7 @@ class BasicCache(BaseCache):
         """
         Store key as the cache key in cache_data
         Then use item as the value for the key
-        Args: 
+        Args:
             key: The key to associate the value
             item: The value to associate the key
         Returns:
@@ -27,7 +27,7 @@ class BasicCache(BaseCache):
         """
         Find key in cache_data if found return value
         if not found return none
-        Args: 
+        Args:
             key: The key to search for
         Returns:
             Return the dictionary value if none, return None
