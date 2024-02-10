@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Run a simple index page"""
 
 from flask import Flask, render_template
 from flask_babel import Babel
