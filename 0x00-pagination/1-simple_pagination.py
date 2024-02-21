@@ -1,5 +1,9 @@
+#!/usr/bin/env python3
+"""
+Pagination Module
+"""
+
 import csv
-import math
 from typing import List
 
 
@@ -40,7 +44,9 @@ class Server:
 
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
-        res = index_range(page, page_size)
+        start, end = index_range(page, page_size)
         data = self.dataset()
-        indexedData = data[res[0]:res[1]]
+        if start > len(data):
+            return []
+        indexedData = data[start:end]
         return indexedData

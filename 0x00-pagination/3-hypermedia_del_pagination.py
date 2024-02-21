@@ -4,13 +4,17 @@ Deletion-resilient hypermedia pagination
 """
 
 import csv
-import math
 from typing import List, Dict
 
 
 def index_range(page, page_size):
     """The function returns a tuple.
     Of the page and page size(number of pages)
+    Args:
+        int: page
+        int: page_size
+    Returns:
+        Tuple: (start_index, end_index)
     """
     start_idx = (page - 1) * page_size
     end_idx = start_idx + page_size
@@ -29,6 +33,8 @@ class Server:
 
     def dataset(self) -> List[List]:
         """Cached dataset
+        Returns:
+            List[List]: Cached data
         """
         if self.__dataset is None:
             with open(self.DATA_FILE) as f:
@@ -40,6 +46,8 @@ class Server:
 
     def indexed_dataset(self) -> Dict[int, List]:
         """Dataset indexed by sorting position, starting at 0
+        Returns:
+            Dict[int, List]: dictionary of indexed pages
         """
         if self.__indexed_dataset is None:
             dataset = self.dataset()
@@ -52,6 +60,11 @@ class Server:
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """
         Get results from indexed dataset
+        Args:
+            int: index
+            int: page_size
+        Returns:
+            Dict: dictionary of pages
         """
 
         data = self.indexed_dataset()
