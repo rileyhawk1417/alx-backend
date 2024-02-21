@@ -65,7 +65,7 @@ class Server:
             page: int (default=1)
             page_size: int (default=10)
         Returns:
-            Dict: pages 
+            Dict: pages
         """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
