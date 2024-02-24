@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Class that implements LRU cache strategy"""
-from collections import deque as queue
+from collections import OrderedDict
 BaseCache = __import__('base_caching').BaseCaching
 
 
@@ -10,13 +10,12 @@ class LRUCache(BaseCache):
     def __init__(self) -> None:
         super().__init__()
         self.max_items = BaseCache.MAX_ITEMS
-        self.size = 0
-        self.lru_queue = queue()
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """
-        Add key as the dictionary key and item as the value for the key
-        Remove the least used value & key if max entries are reached
+        Add key in cache if not present.
+        If max cache items reached remove LRU then add.
         Args:
             key: The key to associate the value
             item: The value to associate the key
@@ -24,23 +23,15 @@ class LRUCache(BaseCache):
             Return None
         """
         if key and item:
-            self.size += 1
-            if key in self.cache_data:
+            if key not in self.cache_data:
+                if len(self.cache_data) + 1 > self.max_items:
+                    lru_key, _ = self.cache_data.popitem(True)
+                    print('DISCARD:', lru_key)
                 self.cache_data[key] = item
-                """
-                Remove current position for key
-                and add to the top of the queue
-                """
-                self.lru_queue.remove(key)
-                self.lru_queue.append(key)
-                return
-            if self.size > self.max_items:
-                prev = self.lru_queue.popleft()
-                self.cache_data.pop(prev)
-                print(f"DISCARD: {prev}")
-            self.cache_data[key] = item
-            self.lru_queue.append(key)
-        return None
+                self.cache_data.move_to_end(key, last=False)
+            else:
+                self.cache_data[key] = item
+        return
 
     def get(self, key):
         """
@@ -52,12 +43,6 @@ class LRUCache(BaseCache):
         Returns:
             Return None
         """
-        if key and key in self.cache_data:
-            """
-            Remove value at current position
-            Move it to the top of the queue
-            """
-            self.lru_queue.remove(key)
-            self.lru_queue.append(key)
-            return (self.cache_data[key])
-        return None
+        if key is not None and key in self.cache_data:
+            self.cache_data.move_to_end(key, last=False)
+        return self.cache_data.get(key, None)
