@@ -5,7 +5,9 @@ BaseCache = __import__('base_caching').BaseCaching
 
 
 class LRUCache(BaseCache):
-    """LRU Cache"""
+    """LRU Cache
+    Least Recently Used cache strategy.
+    """
 
     def __init__(self) -> None:
         """Init the cache"""
