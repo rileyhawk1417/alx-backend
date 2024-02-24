@@ -60,7 +60,7 @@ class LFUCache(BaseCaching):
         if key is None or item is None:
             return
         if key not in self.cache_data:
-            if len(self.cache_data) + 1 > self.max_items:
+            if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
                 lfu_key, _ = self.freq_keys[-1]
                 self.cache_data.pop(lfu_key)
                 self.freq_keys.pop()
