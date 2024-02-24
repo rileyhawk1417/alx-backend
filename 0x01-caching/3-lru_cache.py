@@ -8,6 +8,7 @@ class LRUCache(BaseCache):
     """LRU Cache"""
 
     def __init__(self) -> None:
+        """Init the cache"""
         super().__init__()
         self.max_items = BaseCache.MAX_ITEMS
         self.cache_data = OrderedDict()
