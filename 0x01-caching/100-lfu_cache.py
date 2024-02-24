@@ -5,10 +5,10 @@ Least Frequently Used Caching Module
 """
 
 from collections import OrderedDict
-from base_caching import BaseCaching
+BaseCache = __import__('base_caching').BaseCaching
 
 
-class LFUCache(BaseCaching):
+class LFUCache(BaseCache):
     """
     Least Frequently Used will remove items
     from cache that are not used often, when limit is reached.
@@ -20,7 +20,7 @@ class LFUCache(BaseCaching):
         """Init the class"""
         super().__init__()
         self.cache_data = OrderedDict()
-        self.max_items = BaseCaching.MAX_ITEMS
+        self.max_items = BaseCache.MAX_ITEMS
         self.freq_keys = []
 
     def __reorder_items(self, mru):
@@ -60,7 +60,7 @@ class LFUCache(BaseCaching):
         if key is None or item is None:
             return
         if key not in self.cache_data:
-            if len(self.cache_data) + 1 > BaseCaching.MAX_ITEMS:
+            if len(self.cache_data) + 1 > BaseCache.MAX_ITEMS:
                 lfu_key, _ = self.freq_keys[-1]
                 self.cache_data.pop(lfu_key)
                 self.freq_keys.pop()
